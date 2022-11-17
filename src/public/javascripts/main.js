@@ -120,42 +120,40 @@ function hit(evt) {
     nextCard.width = '200';
     nextCard.style.display = 'inline-block';
     nextCard.style.marginRight = '10px';
-    console.log(evt.currentTarget.myParam[0]); 
-    evt.currentTarget.myParam[2] = playerSum;
-    console.log(evt.currentTarget.myParam[2]);
     div.insertBefore(nextCard, document.querySelector('#nextMove'));
     document.querySelector("#displayText").innerHTML = `Player Hand - Total: ${playerSum}`;
- 
 
 }
 
 function stand(evt) { 
-    const div = document.querySelector('#gameDiv');
+    const div = document.querySelector('#computerHand');
     const cardsArray = evt.currentTarget.myParam[1];
     const copy = cardsArray.slice(0);
     const card = copy.splice(cardsArray.length - 1, 1);
-    const computerSumBefore = findSum(evt.currentTarget.myParam[0]);
+    const computerSumBefore = findSum(evt.currentTarget.myParam[0]); 
     evt.currentTarget.myParam[0].push(...card);
     evt.currentTarget.myParam[1] = copy;
-    console.log(evt.currentTarget.myParam);
+    const playerSum = findSum(evt.currentTarget.myParam[2]);
     const computerSum = findSum(evt.currentTarget.myParam[0]); 
     console.log(computerSumBefore, computerSum, card[0].rank);
     if (parseInt(computerSumBefore) > 21) {
-        displayResult("win", evt.currentTarget.myParam[2], computerSum);
+        displayResult("win", playerSum, computerSum);
         return;
     }
     else if (parseInt(computerSumBefore) >= 15 && parseInt(computerSumBefore) <= 21) {
-        displayResult("compare", evt.currentTarget.myParam[2], computerSumBefore);
+        displayResult("compare", playerSum, computerSumBefore);
         return;
     }
     else {
         const nextCard = document.createElement("img");
         nextCard.src = `../img/cards/unknown.svg`;
+        nextCard.className = 'next';
+        nextCard.id = 'next';
         nextCard.width = '190';
         nextCard.style.display = 'inline-block';
         nextCard.style.marginRight = '10px';
         console.log(evt.currentTarget.myParam[0]); 
-        div.insertBefore(nextCard, document.querySelector('#playerHand'));
+        div.insertBefore(nextCard, document.querySelector('#next'));
     }
     
 }
@@ -182,7 +180,9 @@ function Game(deck, hand) {
     computerHand1.style.display = 'inline-block';
     computerHand1.style.marginRight = '10px'; 
     computerHand2.src = `../img/cards/unknown.svg`;
-    computerHand2.width = '185';
+    computerHand2.className = 'next';
+    computerHand2.id = 'next';
+    computerHand2.width = '190';
     computerHand2.style.dispaly = 'inline-block';
     computerHandDiv.appendChild(computerHand1);
     computerHandDiv.appendChild(computerHand2);  
@@ -192,7 +192,7 @@ function Game(deck, hand) {
     playerHandDiv.className = "playerHand";
     playerHandDiv.id = "playerHand"; 
     const playerHandText = document.createElement("h3"); 
-    let playerSum = findSum(playerHand);
+    const playerSum = findSum(playerHand);
     playerHandText.innerHTML=`Player Hand - Total: ${playerSum}`;
     playerHandText.className = "displayText";
     playerHandText.id ="displayText"; 
@@ -230,8 +230,8 @@ function Game(deck, hand) {
 
     hitBtn.addEventListener('click', hit, false);
     standBtn.addEventListener('click', stand, false);
-    hitBtn.myParam = [playerHand, deck, playerSum];
-    standBtn.myParam = [computerHand, deck, playerSum];
+    hitBtn.myParam = [playerHand, deck];
+    standBtn.myParam = [computerHand, deck, playerHand];
 }
 
 
