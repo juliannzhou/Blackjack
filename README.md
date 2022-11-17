@@ -1,4 +1,4 @@
-# Blackjack
+# Blackjack game
 a simple game of blackjack in javascript/html
 
 To run the game:
