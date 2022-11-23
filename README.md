@@ -1,15 +1,8 @@
 # Blackjack game
 a simple game of blackjack in javascript/html
 
-To run the game:
 
-```
-npm install
-cd src
-node app.js
-```
-
-Open ```localhost:3000```
+Open ```blackjack-game-juliann-zhou.glitch.me```
 
 Enter start values in the form ```x,y,z,q``` then press play or click play without entering values
 
