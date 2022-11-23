@@ -2,7 +2,7 @@
 a simple game of blackjack in javascript/html
 
 
-Open ```blackjack-game-juliann-zhou.glitch.me```
+Open https://blackjack-game-juliann-zhou.glitch.me
 
 Enter start values in the form ```x,y,z,q``` then press play or click play without entering values
 
